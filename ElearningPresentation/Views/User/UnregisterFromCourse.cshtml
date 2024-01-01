@@ -1,0 +1,10 @@
+﻿@model Entity.Course
+
+<h2>Unregister from @Model.Title</h2>
+<p>@Model.Description</p>
+
+<form asp-action="UnregisterFromCourse" asp-controller="User" method="post">
+    <input type="hidden" name="userId" value="@ViewBag.UserId" />
+    <input type="hidden" name="courseId" value="@Model.CourseId" />
+    <button type="submit">Unregister</button>
+</form>

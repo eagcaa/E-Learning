@@ -1,0 +1,27 @@
+﻿@model DashboardViewModel
+
+<h2>Welcome, @ViewBag.UserName!</h2>
+
+<h3>Completed Courses</h3>
+<ul>
+    @foreach (var course in Model.CompletedCourses)
+    {
+        <li>@course.Title</li>
+    }
+</ul>
+
+<h3>Enrolled Courses</h3>
+<ul>
+    @foreach (var course in Model.EnrolledCourses)
+    {
+        <li>@course.Title</li>
+    }
+</ul>
+
+<h3>Available Courses</h3>
+<ul>
+    @foreach (var course in Model.AvailableCourses)
+    {
+        <li>@course.Title <a href="@Url.Action("RegisterToCourse", new { userId = ViewBag.UserId, courseId = course.CourseId })">Register</a></li>
+    }
+</ul>

@@ -1,0 +1,10 @@
+﻿@model Entity.Course
+
+<h2>Complete @Model.Title</h2>
+<p>@Model.Description</p>
+
+<form asp-action="CompleteCourse" asp-controller="User" method="post">
+    <input type="hidden" name="userId" value="@ViewBag.UserId" />
+    <input type="hidden" name="courseId" value="@Model.CourseId" />
+    <button type="submit">Complete</button>
+</form>

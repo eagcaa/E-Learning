@@ -1,0 +1,16 @@
+﻿@model Entity.Course
+
+<h2>Delete Course</h2>
+
+<p>Are you sure you want to delete this course?</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </div>
+}
+
+<a asp-action="Courses" asp-route-instructorId="@Model.InstructorId">Back to Courses</a>

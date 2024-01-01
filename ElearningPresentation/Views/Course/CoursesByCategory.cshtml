@@ -1,0 +1,34 @@
+﻿@model Entity.Course
+@{
+    ViewData["Title"] = "Courses by Category";
+}
+
+<h2>Courses by Category</h2>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            <tr>
+                <td>@Model.CourseId</td>
+                <td>@Model.Title</td>
+                <td>@Model.Description</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@Model.CourseId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

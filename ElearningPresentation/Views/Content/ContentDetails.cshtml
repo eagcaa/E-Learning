@@ -1,0 +1,24 @@
+﻿@model Entity.Content
+
+@{
+    ViewData["Title"] = "Content Details";
+}
+
+<h2>Content Details</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">ID</dt>
+    <dd class="col-sm-10">@Model.ContentId</dd>
+    <dt class="col-sm-2">Title</dt>
+    <dd class="col-sm-10">@Model.Title</dd>
+    <dt class="col-sm-2">Description</dt>
+    <dd class="col-sm-10">@Model.Description</dd>
+    <dt class="col-sm-2">Type</dt>
+    <dd class="col-sm-10">@Model.Type</dd>
+    <dt class="col-sm-2">File Path</dt>
+    <dd class="col-sm-10">@Model.FilePath</dd>
+</dl>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>
