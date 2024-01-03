@@ -11,12 +11,28 @@ namespace Data.Concrete
 {
     public class Context : IdentityDbContext<AppUser, AppRole, int>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public Context(DbContextOptions<Context> options) : base(options)
         {
-            optionsBuilder.UseSqlServer("server = BOSLT277 ;initial catalog=Elearning;integrated Security=true");
         }
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<User>().HasData(
+	   new User
+	   {
+		   UserId = 1,
+		   FirstName = "Ezgi",
+		   LastName = "Agca",
+		   Email = "user@example.com",
+		   Password = "123",
+		   AppUserID = 123456
+	   });
+		}
     }
 }

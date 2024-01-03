@@ -1,7 +1,12 @@
 using Data.Concrete;
 using Entity;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +18,7 @@ builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
 {
     // Þifre gereksinimleri
     options.Password.RequireDigit = true;
@@ -62,8 +67,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "login",
-    pattern: "UserLogin/Login",
-    defaults: new { controller = "UserLogin", action = "Login" });
+    pattern: "UserLogin/{action=Login}/{id?}",
+    defaults: new { controller = "UserLogin" });
 
 app.MapControllerRoute(
     name: "default",
@@ -82,18 +87,14 @@ app.UseEndpoints(endpoints =>
         defaults: new { controller = "Instructor" });
 
     endpoints.MapControllerRoute(
-        name: "userLogin",
-        pattern: "UserLogin/{action=Login}/{id?}",
-        defaults: new { controller = "UserLogin" });
-
-    endpoints.MapControllerRoute(
         name: "course",
         pattern: "Course/{action=Index}/{id?}",
         defaults: new { controller = "Course" });
+
     endpoints.MapControllerRoute(
-    name: "content",
-    pattern: "Content/{action=Index}/{id?}",
-    defaults: new { controller = "Content" });
+        name: "content",
+        pattern: "Content/{action=Index}/{id?}",
+        defaults: new { controller = "Content" });
 
     endpoints.MapControllerRoute(
         name: "default",
@@ -101,3 +102,4 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+

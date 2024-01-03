@@ -1,4 +1,5 @@
 ﻿using Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,6 @@ namespace ElearningPresentation.Controllers
 {
     public class LoginController : Controller
     {
-        // Kullanıcı giriş sayfası
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
 
@@ -16,8 +16,17 @@ namespace ElearningPresentation.Controllers
             _userManager = userManager;
         }
 
+        // Kullanıcı giriş sayfasını göstermek için GET işlemi
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         // Kullanıcı girişi için POST işlemi
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string email, string password)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -37,3 +46,4 @@ namespace ElearningPresentation.Controllers
         }
     }
 }
+

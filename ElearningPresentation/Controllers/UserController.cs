@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using ElearningPresentation.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ElearningPresentation.Controllers
@@ -61,6 +62,29 @@ namespace ElearningPresentation.Controllers
                 AvailableCourses = availableCourses,
                 EnrolledCourses = enrolledCourses
             };
+
+            return View(model);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // Kullanıcının kayıt olabilmesi için POST işlemi
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Create(UserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Kullanıcı kaydı ve diğer işlemleri gerçekleştir
+                // Örnek olarak _userService.RegisterUser(model) gibi bir metod kullanabilirsiniz
+
+                // Kullanıcı başarıyla kaydedildiyse giriş sayfasına yönlendir
+                return RedirectToAction("Login", "Login");
+            }
 
             return View(model);
         }
